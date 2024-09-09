@@ -1,12 +1,12 @@
 package uz.pdp.project_management_front_end.controller;
 
-import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.project_management_front_end.domain.request.CompanyCreateDTO;
 import uz.pdp.project_management_front_end.service.CompanyService;
+import uz.pdp.project_management_front_end.service.UserService;
 
 import java.util.UUID;
 
@@ -16,34 +16,37 @@ public class CompanyController {
 
     @Autowired
     private CompanyService companyService;
+    @Autowired
+    private UserService userService;
 
     @PostMapping
     public String save(CompanyCreateDTO createDTO, Model model) {
         companyService.save(createDTO);
         model.addAttribute("company", companyService.getAllCompanies());
-        return "pa-dashboard";
+        return "redirect:/company";
     }
 
     @GetMapping
     public String getAll(Model model) {
-        companyService.getAllCompanies();
         model.addAttribute("company", companyService.getAllCompanies());
+        model.addAttribute("ceos", userService.getAllCEO());
         return "pa-dashboard";
     }
 
-    @PutMapping("/{id}")
-    public String freeze(@PathVariable("id")UUID id, Boolean freeze, Model model) {
-        companyService.freezeCompany(id, freeze);
-        model.addAttribute("company", companyService.getAllCompanies());
-        return "pa-dashboard";
-    }
 
-    @PutMapping("/{id}")
-    public String unfreeze(@PathVariable("id")UUID id, Boolean unfreeze, Model model) {
-        companyService.unfreezeCompany(id, unfreeze);
-        model.addAttribute("company", companyService.getAllCompanies());
-        return "pa-dashboard";
-    }
+//    @PutMapping("/{id}")
+//    public String freeze(@PathVariable("id")UUID id, Boolean freeze, Model model) {
+//        companyService.freezeCompany(id, freeze);
+//        model.addAttribute("company", companyService.getAllCompanies());
+//        return "pa-dashboard";
+//    }
+//
+//    @GetMapping("/{id}")
+//    public String unfreeze(@PathVariable("id")UUID id, Boolean unfreeze, Model model) {
+//        companyService.unfreezeCompany(id, unfreeze);
+//        model.addAttribute("company", companyService.getAllCompanies());
+//        return "pa-dashboard";
+//    }
 
 
 

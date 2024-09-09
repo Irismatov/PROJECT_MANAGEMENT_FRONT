@@ -1,4 +1,4 @@
-package uz.pdp.project_management_front_end.domain.view;
+package uz.pdp.project_management_front_end.domain.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,11 +12,9 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-public class CompanyInfoViewImpl {
-    private UUID id;
+public class CompanyResponse {
+    private UUID ceoId;
     private String name;
     private String address;
     private LocalDate establishmentDate;
-    boolean isBlocked;
-    private String ceoUsername;
 }

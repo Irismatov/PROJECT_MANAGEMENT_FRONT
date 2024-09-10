@@ -32,13 +32,14 @@
                     <div class="mb-3">
                         <label for="teamLead" class="form-label">Team Lead</label>
                         <select class="form-select" id="teamLead">
-                            <option value="">Select Team Lead</option>
-                            <!-- Options for Team Leaders -->
-                            <option value="1">John Doe</option>
+                            <option value="">Choose TeamLead</option>
+                            <div th:each="team : ${te}">
+                                <option th:text="${}" th:value="${ceo.id}"></option>
+                            </div>
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="products" class="form-label">Products</label>
+                        <label for="product2" class="form-label">Products</label>
                         <div>
                             <!-- Example checkboxes for products -->
                             <div class="form-check">

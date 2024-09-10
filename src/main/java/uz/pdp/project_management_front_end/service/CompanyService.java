@@ -2,7 +2,6 @@ package uz.pdp.project_management_front_end.service;
 
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -53,17 +52,18 @@ public class CompanyService {
         return response.getBody();
     }
 
-//    public void freezeCompany(UUID companyId, boolean frozen) {
-//        restTemplate.put(
-//                "http://localhost:8080/company/" + companyId,
-//                frozen
-//        );
-//    }
-//
-//    public void unfreezeCompany(UUID companyId, boolean unfrozen) {
-//        restTemplate.put(
-//                "http://localhost:8080/company/" + companyId,
-//                unfrozen
-//        );
-//    }
+    public void freezeCompany(UUID companyId) {
+        restTemplate.put(
+                "http://localhost:8080/company/" + companyId + "/block",
+                null
+        );
+    }
+
+    public void unfreezeCompany(UUID companyId) {
+        restTemplate.put(
+                "http://localhost:8080/company/" + companyId +"/unblock",
+                null
+
+        );
+    }
 }

@@ -34,6 +34,6 @@ public class AuthController {
     public String login(LoginRequest loginRequest) {
         String token = authService.login(loginRequest).getToken();
         httpSession.setAttribute("token", token);
-        return "redirect:/company";
+        return "redirect:/product";
     }
 }

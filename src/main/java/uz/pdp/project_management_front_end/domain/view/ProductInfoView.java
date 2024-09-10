@@ -15,7 +15,7 @@ public class ProductInfoView {
     private String name;
     private String gitRepo;
     private String description;
-    private UUID ownerId;
-    private UUID  teamId;
+    private String ownerName;
+    private String  teamName;
 }
 

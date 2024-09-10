@@ -61,7 +61,7 @@
     <table class="table table-hover table-striped">
         <thead class="table-dark">
             <tr>
-                <th>#</th>
+                <th>№</th>
                 <th>Name</th>
                 <th>GitHub Repository</th>
                 <th>Description</th>
@@ -72,16 +72,16 @@
         </thead>
         <tbody>
             <!-- Sample Data Rows (Replace with Dynamic Content) -->
-            <tr>
+            <tr th:each="product : ${products}">
                 <td>1</td>
-                <td>Project Alpha</td>
-                <td>github.com/<span class="text-primary">project-alpha</span></td>
-                <td>An innovative project to streamline tasks.</td>
-                <td>John Doe</td>
-                <td>Team A</td>
+                <td th:text = "${product.name}"></td>
+                <td  th:text = "${product.gitRepo}" >github.com/<span class="text-primary"></span></td>
+                <td  th:text = "${product.description}"></td>
+                <td  th:text = "${product.ownerName}"></td>
+                <td  th:text = "${product.teamName}"></td>
                 <td>
-                    <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#updateModal">Update</button>
-                    <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
+                    <a th:href = "@{product/update/{id}(id=${product.id})}" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#updateModal">Update</a>
+                    <a th:href = "@{product/delete/{id}(id=${product.id})}" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a>
                 </td>
             </tr>
             <!-- More rows as needed -->
@@ -132,18 +132,6 @@
                     <div class="col-12">
                         <label for="updateDescription" class="form-label">Description</label>
                         <input type="text" class="form-control" id="updateDescription">
-                    </div>
-                    <div class="col-12">
-                        <label for="updateOwner" class="form-label">Owner</label>
-                        <select id="updateOwner" class="form-select">
-                            <!-- Dynamically fill options -->
-                        </select>
-                    </div>
-                    <div class="col-12">
-                        <label for="updateTeam" class="form-label">Team</label>
-                        <select id="updateTeam" class="form-select">
-                            <!-- Dynamically fill options -->
-                        </select>
                     </div>
                 </form>
             </div>

@@ -37,7 +37,8 @@
                                 <input type="email" class="form-control" placeholder="Email" required name="email">
                             </div>
                             <div class="col">
-                                <input type="password" class="form-control" placeholder="Password" required name="password">
+                                <input type="password" class="form-control" placeholder="Password" required
+                                       name="password">
                             </div>
                         </div>
                         <div class="mb-3">
@@ -55,6 +56,7 @@
                             <th>Name</th>
                             <th>Username</th>
                             <th>Email</th>
+<!--                            <th>Company</th>-->
                         </tr>
                         </thead>
                         <tbody id="ceoList">
@@ -62,6 +64,9 @@
                             <td th:text="${ceo.firstName}"></td>
                             <td th:text="${ceo.username}"></td>
                             <td th:text="${ceo.email}"></td>
+<!--                            <div th:each="compan : ${company}">-->
+<!--                            <td th:text="${compan.name}"></td>-->
+<!--                            </div>-->
                         </tr>
                         </tbody>
                     </table>
@@ -118,9 +123,11 @@
                             <td th:text="${compan.name}"></td>
                             <td th:text="${compan.address}"></td>
                             <td th:text="${compan.establishmentDate}"></td>
-                            <td>
-                                <button class="btn btn-warning btn-sm"
-                                        onclick="toggleFreeze(this)">Freeze</button>
+                            <td th:if="${compan.isBlocked}">
+                                <a th:href="@{/company/unfreeze/{id}(id=${compan.id})}" class="btn btn-warning btn-sm">Unfreeze</a>
+                            </td>
+                            <td th:if="${!compan.isBlocked}">
+                                <a th:href="@{/company/freeze/{id}(id=${compan.id})}" class="btn btn-success btn-sm">Freeze</a>
                             </td>
                         </tr>
                         </tbody>
@@ -143,8 +150,14 @@
                 <p>Are you sure you want to change the freeze status of this company?</p>
             </div>
             <div class="modal-footer" th:each="compan : ${company}">
+
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <a type="button" class="btn btn-warning"
+                   id="confirmFreezeBtn">Confirm</a>
+
                 <a type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</a>
                 <a th:href="@{/company/freeze/{id}(id=${compan.id})}" type="button" class="btn btn-warning" id="confirmFreezeBtn">Confirm</a>
+
             </div>
         </div>
     </div>

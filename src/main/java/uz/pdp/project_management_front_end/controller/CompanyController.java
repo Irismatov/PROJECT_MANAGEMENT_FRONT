@@ -34,19 +34,20 @@ public class CompanyController {
     }
 
 
-//    @PutMapping("/{id}")
-//    public String freeze(@PathVariable("id")UUID id, Boolean freeze, Model model) {
-//        companyService.freezeCompany(id, freeze);
-//        model.addAttribute("company", companyService.getAllCompanies());
-//        return "pa-dashboard";
-//    }
-//
-//    @GetMapping("/{id}")
-//    public String unfreeze(@PathVariable("id")UUID id, Boolean unfreeze, Model model) {
-//        companyService.unfreezeCompany(id, unfreeze);
-//        model.addAttribute("company", companyService.getAllCompanies());
-//        return "pa-dashboard";
-//    }
+    @GetMapping("/freeze/{id}/block")
+    public String freeze(@PathVariable("id")UUID id, Model model) {
+        companyService.freezeCompany(id);
+      //  model.addAttribute("company", companyService.getAllCompanies());
+        return "pa-dashboard";
+    }
+
+
+    @GetMapping("/unfreeze/{id}/unblock")
+    public String unfreeze(@PathVariable("id")UUID id, Model model) {
+        companyService.unfreezeCompany(id);
+    //    model.addAttribute("company", companyService.getAllCompanies());
+        return "pa-dashboard";
+    }
 
 
 

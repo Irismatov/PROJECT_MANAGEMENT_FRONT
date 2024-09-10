@@ -18,13 +18,12 @@ public class CompanyService {
     @Autowired
     private RestTemplate restTemplate;
 
-    public CompanyInfoView save(CompanyCreateDTO company) {
-        ResponseEntity<CompanyInfoView> companyInfoViewResponseEntity = restTemplate.postForEntity(
+    public void save(CompanyCreateDTO company) {
+        restTemplate.postForEntity(
                 "http://localhost:8080/company",
                 company,
-                CompanyInfoView.class
+                null
         );
-        return companyInfoViewResponseEntity.getBody();
     }
 
     public List<CompanyInfoView> getAllCompanies() {
@@ -37,17 +36,17 @@ public class CompanyService {
         return response.getBody();
     }
 
-    public void freezeCompany(UUID companyId, boolean frozen) {
+    public void freezeCompany(UUID companyId) {
         restTemplate.put(
-                "http://localhost:8080/company/" + companyId,
-                frozen
+                "http://localhost:8080/company/" + companyId + "/block",
+                null
         );
     }
 
-    public void unfreezeCompany(UUID companyId, boolean unfrozen) {
+    public void unfreezeCompany(UUID companyId) {
         restTemplate.put(
-                "http://localhost:8080/company/" + companyId,
-                unfrozen
+                "http://localhost:8080/company/" + companyId + "/unblock" ,
+                null
         );
     }
 }

@@ -21,28 +21,28 @@ public class CompanyController {
     public String save(CompanyCreateDTO createDTO, Model model) {
         companyService.save(createDTO);
         model.addAttribute("company", companyService.getAllCompanies());
-        return "pa-dashboard";
+        return "project-admin/pa-dashboard";
     }
 
     @GetMapping
     public String getAll(Model model) {
         companyService.getAllCompanies();
         model.addAttribute("company", companyService.getAllCompanies());
-        return "pa-dashboard";
+        return "project-admin/pa-dashboard";
     }
 
     @PutMapping("/{id}")
-    public String freeze(@PathVariable("id")UUID id, Boolean freeze, Model model) {
-        companyService.freezeCompany(id, freeze);
+    public String freeze(@PathVariable("id")UUID id, Model model) {
+        companyService.freezeCompany(id);
         model.addAttribute("company", companyService.getAllCompanies());
-        return "pa-dashboard";
+        return "project-admin/pa-dashboard";
     }
 
     @PutMapping("/{id}")
-    public String unfreeze(@PathVariable("id")UUID id, Boolean unfreeze, Model model) {
-        companyService.unfreezeCompany(id, unfreeze);
+    public String unfreeze(@PathVariable("id")UUID id, Model model) {
+        companyService.unfreezeCompany(id);
         model.addAttribute("company", companyService.getAllCompanies());
-        return "pa-dashboard";
+        return "project-admin/pa-dashboard";
     }
 
 

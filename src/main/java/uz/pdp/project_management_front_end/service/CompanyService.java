@@ -53,17 +53,29 @@ public class CompanyService {
         return response.getBody();
     }
 
-//    public void freezeCompany(UUID companyId, boolean frozen) {
-//        restTemplate.put(
-//                "http://localhost:8080/company/" + companyId,
-//                frozen
-//        );
-//    }
-//
-//    public void unfreezeCompany(UUID companyId, boolean unfrozen) {
-//        restTemplate.put(
-//                "http://localhost:8080/company/" + companyId,
-//                unfrozen
-//        );
-//    }
+    public void freezeCompany(UUID companyId) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(httpSession.getAttribute("token").toString()); // Replace with your actual token
+
+        HttpEntity<Void> entity = new HttpEntity<>(headers);
+        restTemplate.exchange(
+                "http://localhost:8080/company/" + companyId + "/blocked",
+                HttpMethod.PUT,
+                entity,
+                Void.class
+        );
+    }
+
+    public void unfreezeCompany(UUID companyId) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(httpSession.getAttribute("token").toString()); // Replace with your actual token
+
+        HttpEntity<Void> entity = new HttpEntity<>(headers);
+        restTemplate.exchange(
+                "http://localhost:8080/company/" + companyId + "/blocked",
+                HttpMethod.PUT,
+                entity,
+                Void.class
+        );
+    }
 }

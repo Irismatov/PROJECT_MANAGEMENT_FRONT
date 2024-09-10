@@ -19,7 +19,8 @@
                     <h5>Add CEO</h5>
                 </div>
                 <div class="card-body">
-                    <form id="addCEOForm" th:action="@{/users}" method="post">
+                    <form id="addCEOForm" th:action="@{/use
+                    rs}" method="post">
                         <div class="row mb-3">
                             <div class="col">
                                 <input type="text" class="form-control" placeholder="Name" required name="firstName">
@@ -149,9 +150,14 @@
                 <p>Are you sure you want to change the freeze status of this company?</p>
             </div>
             <div class="modal-footer" th:each="compan : ${company}">
+
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                 <a type="button" class="btn btn-warning"
                    id="confirmFreezeBtn">Confirm</a>
+
+                <a type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</a>
+                <a th:href="@{/company/freeze/{id}(id=${compan.id})}" type="button" class="btn btn-warning" id="confirmFreezeBtn">Confirm</a>
+
             </div>
         </div>
     </div>

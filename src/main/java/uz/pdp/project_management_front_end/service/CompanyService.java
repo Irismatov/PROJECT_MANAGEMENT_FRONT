@@ -2,7 +2,6 @@ package uz.pdp.project_management_front_end.service;
 
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -54,6 +53,7 @@ public class CompanyService {
     }
 
     public void freezeCompany(UUID companyId) {
+
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(httpSession.getAttribute("token").toString()); // Replace with your actual token
 
@@ -63,10 +63,16 @@ public class CompanyService {
                 HttpMethod.PUT,
                 entity,
                 Void.class
+
+        restTemplate.put(
+                "http://localhost:8080/company/" + companyId + "/block",
+                null
+
         );
     }
 
     public void unfreezeCompany(UUID companyId) {
+
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(httpSession.getAttribute("token").toString()); // Replace with your actual token
 
@@ -76,6 +82,12 @@ public class CompanyService {
                 HttpMethod.PUT,
                 entity,
                 Void.class
+
+        restTemplate.put(
+                "http://localhost:8080/company/" + companyId +"/unblock",
+                null
+
+
         );
     }
 }

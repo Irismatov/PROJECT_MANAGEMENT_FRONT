@@ -33,6 +33,7 @@ public class TeamController {
         model.addAttribute("leads" , userService.getAllTeamLeads());
 //        model.addAttribute("products", productService.getProducts());
         model.addAttribute("scrums", userService.getAllScrumMasters());
+        model.addAttribute("developers", userService.getAllDevelopers());
 
         return "hr_admin/team-crud";
     }

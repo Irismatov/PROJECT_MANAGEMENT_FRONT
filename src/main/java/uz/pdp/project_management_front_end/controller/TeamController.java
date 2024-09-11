@@ -12,6 +12,7 @@ import uz.pdp.project_management_front_end.service.ProductService;
 import uz.pdp.project_management_front_end.service.TeamService;
 import uz.pdp.project_management_front_end.service.UserService;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 @Controller
@@ -26,34 +27,33 @@ public class TeamController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping
+    @GetMapping("/get-team")
     public String getAll (Model model) {
         model.addAttribute("teams",teamService.getAllTeams());
-        model.addAttribute("leads" , userService.getAllTeamLeads());
+//        model.addAttribute("leads" , userService.getAllTeamLeads());
+//        model.addAttribute("products", productService.getProducts());
+//        model.addAttribute("scrums", userService.getAllScrumMasters());
+
+//        model.addAttribute("products", new ArrayList<>());
+//        model.addAttribute("scrums", new ArrayList<>());
         return "hr_admin/team-crud";
     }
 
-    @PostMapping
+    @PostMapping("/save")
     public String addTeam(TeamRequest teamRequest, Model model) {
         teamService.saveTeam(teamRequest);
-        model.addAttribute("teams", teamService.getAllTeams());
-        model.addAttribute("leads", userService.getAllTeamLeads());
-        model.addAttribute("products", productService.getProducts());
-        model.addAttribute("scrums", userService.getAllScrumMasters());
-        return "hr_admin/team-crud";
+        return "redirect:/team/get-team";
     }
 
-    @GetMapping("delete/{id}")
+    @GetMapping("/delete-team/{id}")
     public String deleteTeam(@PathVariable("id") UUID id, Model model) {
         teamService.deleteTeam(id);
-        return "hr_admin/team-crud";
+        return "redirect:/team/get-team";
     }
 
-
-
-    @GetMapping("/update/{id}")
+    @GetMapping("/update-team/{id}")
     public String updateTeam(@PathVariable("id") UUID id, TeamRequest teamRequest, Model model) {
         teamService.updateTeam(id, teamRequest);
-        return "hr_admin/team-crud";
+        return "redirect:/team/get-team";
     }
 }

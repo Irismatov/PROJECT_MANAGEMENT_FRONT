@@ -21,29 +21,29 @@
         <div class="card mb-4">
             <div class="card-body">
                 <h5 class="card-title">Add HR Admin</h5>
-                <form class="row g-3">
+                <form class="row g-3" th:action="@{/users/save-hr-admin}" method="post">
                     <div class="col-md-3">
                         <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" placeholder="Enter name">
+                        <input type="text" class="form-control" id="name" name="firstName" placeholder="Enter name">
                     </div>
                     <div class="col-md-3">
                         <label for="username" class="form-label">Username</label>
-                        <input type="text" class="form-control" id="username" placeholder="Enter username">
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Enter username">
                     </div>
                     <div class="col-md-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" placeholder="Enter email">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
                     </div>
                     <div class="col-md-3">
                         <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" placeholder="Enter password">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Enter password">
                     </div>
                     <div class="col-md-3">
                         <label for="role" class="form-label">Role</label>
-                        <input type="text" class="form-control" id="role" value="HR_ADMIN" readonly>
+                        <input type="text" class="form-control" id="role" name="role" value="HR_ADMIN" readonly>
                     </div>
                     <div class="col-md-12 text-end">
-                        <button type="button" class="btn btn-success">Add HR Admin</button>
+                        <button type="submit" class="btn btn-success">Add HR Admin</button>
                     </div>
                 </form>
             </div>
@@ -63,15 +63,16 @@
             </thead>
             <tbody>
                 <!-- Sample Data Rows (Replace with Dynamic Content) -->
-                <tr>
+                <tr th:each="hr_admin : ${hr_admins}">
                     <td>1</td>
-                    <td>Jane Smith</td>
-                    <td>jane_smith</td>
-                    <td>jane@example.com</td>
+                    <td th:text="${hr_admin.firstName}"></td>
+                    <td th:text="${hr_admin.username}"></td>
+                    <td th:text="${hr_admin.email}"></td>
                     <td>HR_ADMIN</td>
                     <td>
                         <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#updateModal">Update</button>
-                        <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
+                        <a type="submit" class="btn btn-sm btn-danger" th:href="@{/users/delete-hr-admin/{id}(id=${hr_admin.id})}">Delete</a>
+<!--                    <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>-->
                     </td>
                 </tr>
                 <!-- More rows as needed -->

@@ -66,7 +66,6 @@ public class TeamService {
                 entity,
                 new ParameterizedTypeReference<List<TeamResponse>>() {}
         );
-
         return response.getBody();
     }
 

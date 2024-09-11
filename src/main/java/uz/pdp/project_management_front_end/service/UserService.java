@@ -69,6 +69,21 @@ public class UserService {
         return response.getBody();
     }
 
+
+    public List<UserResponse> getAllProductOwnersAndProductIsNull(){
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(httpSession.getAttribute("token").toString());
+
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+        ResponseEntity<List<UserResponse>> response = restTemplate.exchange(
+                "http://localhost:8080/users/getAllProductOwnersAndProductIsNull",
+                HttpMethod.GET,
+                entity,
+                new ParameterizedTypeReference<>() {}
+        );
+        return response.getBody();
+    }
+
     public List<UserResponse> getAllScrumMasters() {
 
         HttpHeaders headers = new HttpHeaders();
@@ -183,6 +198,20 @@ public class UserService {
         HttpEntity<String> entity = new HttpEntity<>(headers);
         ResponseEntity<List<UserResponse>> response = restTemplate.exchange(
                 "http://localhost:8080/users/developer",
+                HttpMethod.GET,
+                entity,
+                new ParameterizedTypeReference<>() {}
+        );
+        return response.getBody();
+    }
+
+    public List<UserResponse> getAllProductOwner() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(httpSession.getAttribute("token").toString());
+
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+        ResponseEntity<List<UserResponse>> response = restTemplate.exchange(
+                "http://localhost:8080/users/get-product-owner",
                 HttpMethod.GET,
                 entity,
                 new ParameterizedTypeReference<>() {}

@@ -16,6 +16,6 @@ import java.util.UUID;
 public class TeamRequest {
     private String name;
     private String description;
-    private String lead;
-    private String scrumMaster;
+    private UUID lead;
+    private UUID scrumMaster;
 }

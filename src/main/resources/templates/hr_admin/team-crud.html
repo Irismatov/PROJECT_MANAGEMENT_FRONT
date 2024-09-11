@@ -29,15 +29,19 @@
                         <label for="teamName" class="form-label">Team Name</label>
                         <input type="text" class="form-control" id="teamName" name="name" placeholder="Enter team name">
                     </div>
-<!--                    <div class="mb-3">-->
-<!--                        <label for="teamLead" class="form-label">Team Lead</label>-->
-<!--                        <select class="form-select" id="teamLead" name="lead">-->
-<!--                            <option value="">Choose TeamLead</option>-->
-<!--                            <div th:each="lead : ${leads}">-->
-<!--                                <option th:text="${lead.username}" th:value="${lead.id}"></option>-->
-<!--                            </div>-->
-<!--                        </select>-->
-<!--                    </div>-->
+                    <div class="mb-3">
+                        <label for="teamName" class="form-label">Team Description</label>
+                        <input type="text" class="form-control" id="description" name="description" placeholder="Enter description">
+                    </div>
+                    <div class="mb-3">
+                        <label for="teamLead" class="form-label">Team Lead</label>
+                        <select class="form-select" id="teamLead" name="lead">
+                            <option value="">Choose Team Leader</option>
+                            <div th:each="lead : ${leads}">
+                                <option th:text="${lead.username}" th:value="${lead.id}"></option>
+                            </div>
+                        </select>
+                    </div>
 <!--                    <div class="mb-3">-->
 <!--                        <label class="form-label">Products</label>-->
 <!--                        <div th:each="product : ${products}">-->
@@ -48,15 +52,15 @@
 <!--                            </div>-->
 <!--                        </div>-->
 <!--                    </div>-->
-<!--                    <div class="mb-3">-->
-<!--                        <label for="scrumMaster" class="form-label">Scrum Master</label>-->
-<!--                        <select class="form-select" id="scrumMaster">-->
-<!--                            <option value="">Select Scrum Master</option>-->
-<!--                            <div th:each="scrum : ${scrums}">-->
-<!--                            <option th:text="${scrum.username}" th:value="${scrum.id}" name="scrumMaster"></option>-->
-<!--                            </div>-->
-<!--                        </select>-->
-<!--                    </div>-->
+                    <div class="mb-3">
+                        <label for="scrumMaster" class="form-label">Scrum Master</label>
+                        <select class="form-select" id="scrumMaster" name="scrumMaster">
+                            <option value="">Select Scrum Master</option>
+                            <div th:each="scrum : ${scrums}">
+                            <option th:text="${scrum.username}" th:value="${scrum.id}"></option>
+                            </div>
+                        </select>
+                    </div>
                     <button type="submit" class="btn btn-primary">Add Team</button>
                 </form>
             </div>
@@ -69,19 +73,23 @@
                 <table class="table table-hover table-striped">
                     <thead class="table-dark">
                         <tr>
-                            <th>#</th>
                             <th>Team Name</th>
+                            <th>Team Description</th>
+                            <th>Team Lead</th>
+                            <th>Scrum Master</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr th:each="team : ${teams}">
-                            <td>1</td>
                             <td th:text="${team.name}"></td>
+                            <td th:text="${team.description}"></td>
+                            <td th:text="${team.lead}"></td>
+                            <td th:text="${team.scrumMaster}"></td>
                             <td>
                                 <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#updateModal">Update</button>
                                 <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#infoModal">Info</button>
-                                <a class="btn btn-danger btn-sm" data-bs-toggle="modal" th:href="@{/team/{id}(id=${team.id})}">Delete</a>
+                                <a th:href="@{/team/delete-team/{id}(id=${team.id})}" class="btn btn-danger btn-sm" >Delete</a>
 <!--                                <a class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a>-->
                             </td>
                         </tr>
@@ -159,10 +167,6 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p><strong>Team Name:</strong> Team Alpha</p>
-                    <p><strong>Team Lead:</strong> John Doe</p>
-                    <p><strong>Products:</strong> Product A, Product B</p>
-                    <p><strong>Scrum Master:</strong> Jane Smith</p>
                     <h6>Employees:</h6>
                     <ul>
                         <li>Michael Johnson</li>
@@ -196,9 +200,8 @@
     </div>
 
     <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
 </body>
 
 </html>

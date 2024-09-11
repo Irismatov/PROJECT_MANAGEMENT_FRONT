@@ -47,7 +47,7 @@ public class TeamService {
         HttpEntity<Void> entity = new HttpEntity<>(headers);
 
         ResponseEntity<Void> response = restTemplate.exchange(
-                "http://localhost:8080/team/delete-team" + teamId,
+                "http://localhost:8080/team/delete-team/" + teamId,
                 HttpMethod.DELETE,
                 entity,
                 Void.class

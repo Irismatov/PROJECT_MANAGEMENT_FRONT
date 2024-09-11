@@ -33,7 +33,7 @@ public class TeamService {
 
 
         ResponseEntity<TeamResponse> response = restTemplate.postForEntity(
-                "http://localhost:8080/team",
+                "http://localhost:8080/team/save-team",
                 entity,
                 TeamResponse.class
         );
@@ -47,7 +47,7 @@ public class TeamService {
         HttpEntity<Void> entity = new HttpEntity<>(headers);
 
         ResponseEntity<Void> response = restTemplate.exchange(
-                "http://localhost:8080/team/" + teamId,
+                "http://localhost:8080/team/delete-team" + teamId,
                 HttpMethod.DELETE,
                 entity,
                 Void.class
@@ -61,7 +61,7 @@ public class TeamService {
         HttpEntity<Void> entity = new HttpEntity<>(headers);
 
         ResponseEntity<List<TeamResponse>> response = restTemplate.exchange(
-                "http://localhost:8080/team",
+                "http://localhost:8080/team/get-team",
                 HttpMethod.GET,
                 entity,
                 new ParameterizedTypeReference<List<TeamResponse>>() {}
@@ -78,7 +78,7 @@ public class TeamService {
         HttpEntity<TeamRequest> entity = new HttpEntity<>(teamRequest, headers);
 
         ResponseEntity<TeamResponse> response = restTemplate.exchange(
-                "http://localhost:8080/team/" + teamId,
+                "http://localhost:8080/team/update-team/" + teamId,
                 HttpMethod.PUT,
                 entity,
                 TeamResponse.class

@@ -3,13 +3,12 @@ package uz.pdp.project_management_front_end.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import uz.pdp.project_management_front_end.domain.request.UserRequest;
 import uz.pdp.project_management_front_end.service.CompanyService;
 import uz.pdp.project_management_front_end.service.UserService;
+
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/users")
@@ -26,11 +25,22 @@ public class UserController {
         return "redirect:/company";
     }
 
-//    @GetMapping
-//    public String getUsers(Model model) {
-//        model.addAttribute("companies", companyService.getAllCompanies());
-//        model.addAttribute("ceos", userService.getAllCEO());
-//        return "redirect:/company";
-//    }
+    @PostMapping("/save-hr-admin")
+    public String addHRAdmin(UserRequest userRequest) {
+        userService.saveHRAdmin(userRequest);
+        return "redirect:/users/get-hr-admin";
+    }
+
+    @GetMapping("/get-hr-admin")
+    public String getHRAdmin(Model model) {
+        model.addAttribute("hr_admins", userService.getAllHRAdmin());
+        return "ceo/hr-admin-crud";
+    }
+
+    @GetMapping("/delete-hr-admin/{id}")
+    public String deleteHRAdmin(@PathVariable UUID id) {
+        userService.deleteHRAdmin(id);
+        return "redirect:/users/get-hr-admin";
+    }
 
 }

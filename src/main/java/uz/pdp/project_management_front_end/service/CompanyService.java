@@ -63,11 +63,6 @@ public class CompanyService {
                 HttpMethod.PUT,
                 entity,
                 Void.class
-
-        restTemplate.put(
-                "http://localhost:8080/company/" + companyId + "/block",
-                null
-
         );
     }
 
@@ -82,12 +77,6 @@ public class CompanyService {
                 HttpMethod.PUT,
                 entity,
                 Void.class
-
-        restTemplate.put(
-                "http://localhost:8080/company/" + companyId +"/unblock",
-                null
-
-
         );
     }
 }

@@ -24,47 +24,40 @@
         <div class="card mb-4">
             <div class="card-body">
                 <h5 class="card-title">Add Team</h5>
-                <form>
+                <form th:action="@{/team/save}" method="post">
                     <div class="mb-3">
                         <label for="teamName" class="form-label">Team Name</label>
-                        <input type="text" class="form-control" id="teamName" placeholder="Enter team name">
+                        <input type="text" class="form-control" id="teamName" name="name" placeholder="Enter team name">
                     </div>
-                    <div class="mb-3">
-                        <label for="teamLead" class="form-label">Team Lead</label>
-                        <select class="form-select" id="teamLead">
-                            <option value="">Choose TeamLead</option>
-                            <div th:each="team : ${te}">
-                                <option th:text="${}" th:value="${ceo.id}"></option>
-                            </div>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="product2" class="form-label">Products</label>
-                        <div>
-                            <!-- Example checkboxes for products -->
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="product1" id="product1">
-                                <label class="form-check-label" for="product1">
-                                    Product A
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="product2" id="product2">
-                                <label class="form-check-label" for="product2">
-                                    Product B
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="scrumMaster" class="form-label">Scrum Master</label>
-                        <select class="form-select" id="scrumMaster">
-                            <option value="">Select Scrum Master</option>
-                            <!-- Options for Scrum Masters -->
-                            <option value="1">Jane Smith</option>
-                        </select>
-                    </div>
-                    <button type="button" class="btn btn-primary">Add Team</button>
+<!--                    <div class="mb-3">-->
+<!--                        <label for="teamLead" class="form-label">Team Lead</label>-->
+<!--                        <select class="form-select" id="teamLead" name="lead">-->
+<!--                            <option value="">Choose TeamLead</option>-->
+<!--                            <div th:each="lead : ${leads}">-->
+<!--                                <option th:text="${lead.username}" th:value="${lead.id}"></option>-->
+<!--                            </div>-->
+<!--                        </select>-->
+<!--                    </div>-->
+<!--                    <div class="mb-3">-->
+<!--                        <label class="form-label">Products</label>-->
+<!--                        <div th:each="product : ${products}">-->
+<!--                            &lt;!&ndash; Example checkboxes for products &ndash;&gt;-->
+<!--                            <div class="form-check">-->
+<!--                                <input class="form-check-input" type="checkbox" value="product1" id="product1" name="product">-->
+<!--                                <label class="form-check-label" for="product1" th:text="${product.name}"></label>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="mb-3">-->
+<!--                        <label for="scrumMaster" class="form-label">Scrum Master</label>-->
+<!--                        <select class="form-select" id="scrumMaster">-->
+<!--                            <option value="">Select Scrum Master</option>-->
+<!--                            <div th:each="scrum : ${scrums}">-->
+<!--                            <option th:text="${scrum.username}" th:value="${scrum.id}" name="scrumMaster"></option>-->
+<!--                            </div>-->
+<!--                        </select>-->
+<!--                    </div>-->
+                    <button type="submit" class="btn btn-primary">Add Team</button>
                 </form>
             </div>
         </div>
@@ -82,23 +75,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Example Data Rows -->
-                        <tr>
+                        <tr th:each="team : ${teams}">
                             <td>1</td>
-                            <td>Team Alpha</td>
+                            <td th:text="${team.name}"></td>
                             <td>
                                 <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#updateModal">Update</button>
                                 <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#infoModal">Info</button>
-                                <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Team Beta</td>
-                            <td>
-                                <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#updateModal">Update</button>
-                                <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#infoModal">Info</button>
-                                <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
+                                <a class="btn btn-danger btn-sm" data-bs-toggle="modal" th:href="@{/team/{id}(id=${team.id})}">Delete</a>
+<!--                                <a class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a>-->
                             </td>
                         </tr>
                     </tbody>

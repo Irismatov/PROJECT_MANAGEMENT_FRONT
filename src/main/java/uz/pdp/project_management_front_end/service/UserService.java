@@ -16,6 +16,7 @@ import uz.pdp.project_management_front_end.domain.response.CompanyResponse;
 import uz.pdp.project_management_front_end.domain.response.UserResponse;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class UserService {
@@ -81,5 +82,60 @@ public class UserService {
                 new ParameterizedTypeReference<>() {}
         );
         return response.getBody();
+    }
+
+    public List<UserResponse> getAllScrumMasters() {
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(httpSession.getAttribute("token").toString());
+
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+        ResponseEntity<List<UserResponse>> response = restTemplate.exchange(
+                "http://localhost:8080/users/scrum-master",
+                HttpMethod.GET,
+                entity,
+                new ParameterizedTypeReference<>() {}
+        );
+        return response.getBody();
+    }
+
+    public UserResponse saveHRAdmin(UserRequest userRequest) {
+        HttpHeaders headers = new HttpHeaders();
+        userRequest.setPermissions(UserRole.HR_ADMIN.getPermissions());
+        headers.setBearerAuth(httpSession.getAttribute("token").toString()); // Replace with your actual token
+        HttpEntity<UserRequest> entity = new HttpEntity<>(userRequest, headers);
+        ResponseEntity<UserResponse> response = restTemplate.postForEntity(
+                "http://localhost:8080/users/save-hr-admin",
+                entity,
+                UserResponse.class
+        );
+        return response.getBody();
+    }
+
+    public List<UserResponse> getAllHRAdmin() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(httpSession.getAttribute("token").toString());
+
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+        ResponseEntity<List<UserResponse>> response = restTemplate.exchange(
+                "http://localhost:8080/users/get-hr-admin",
+                HttpMethod.GET,
+                entity,
+                new ParameterizedTypeReference<>() {}
+        );
+        return response.getBody();
+    }
+
+    public void deleteHRAdmin(UUID id) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(httpSession.getAttribute("token").toString()); // Replace with your actual token
+
+        HttpEntity<Void> entity = new HttpEntity<>(headers);
+        restTemplate.exchange(
+                "http://localhost:8080/users/delete-hr-admin/" + id,
+                HttpMethod.DELETE,
+                entity,
+                Void.class
+        );
     }
 }

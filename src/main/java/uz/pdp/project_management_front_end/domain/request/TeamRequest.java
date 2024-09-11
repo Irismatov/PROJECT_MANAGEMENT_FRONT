@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -13,9 +14,8 @@ import java.util.UUID;
 @Setter
 
 public class TeamRequest {
-
     private String name;
     private String description;
-    private UUID leadId;
-    private UUID scrumMasterId;
+    private String lead;
+    private String scrumMaster;
 }

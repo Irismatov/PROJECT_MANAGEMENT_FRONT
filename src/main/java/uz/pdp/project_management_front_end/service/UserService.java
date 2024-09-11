@@ -138,4 +138,56 @@ public class UserService {
                 Void.class
         );
     }
+
+    public UserResponse saveEmployee(UserRequest userRequest) {
+        HttpHeaders headers = new HttpHeaders();
+
+        if (userRequest.getRole() == UserRole.DEVELOPER){
+            userRequest.setPermissions(UserRole.DEVELOPER.getPermissions());
+        }
+
+        if (userRequest.getRole() == UserRole.SCRUM_MASTER){
+            userRequest.setPermissions(UserRole.SCRUM_MASTER.getPermissions());
+        }
+
+        if (userRequest.getRole() == UserRole.TEAM_LEAD){
+            userRequest.setPermissions(UserRole.TEAM_LEAD.getPermissions());
+        }
+
+        headers.setBearerAuth(httpSession.getAttribute("token").toString()); // Replace with your actual token
+        HttpEntity<UserRequest> entity = new HttpEntity<>(userRequest, headers);
+        ResponseEntity<UserResponse> response = restTemplate.postForEntity(
+                "http://localhost:8080/users/add-employee",
+                entity,
+                UserResponse.class
+        );
+        return response.getBody();
+    }
+
+    public List<UserResponse> getAllEmployee() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(httpSession.getAttribute("token").toString());
+
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+        ResponseEntity<List<UserResponse>> response = restTemplate.exchange(
+                "http://localhost:8080/users/get-employee",
+                HttpMethod.GET,
+                entity,
+                new ParameterizedTypeReference<>() {}
+        );
+        return response.getBody();
+    }
+
+    public void deleteEmployee(UUID id) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(httpSession.getAttribute("token").toString()); // Replace with your actual token
+
+        HttpEntity<Void> entity = new HttpEntity<>(headers);
+        restTemplate.exchange(
+                "http://localhost:8080/users/delete-employee/" + id,
+                HttpMethod.DELETE,
+                entity,
+                Void.class
+        );
+    }
 }

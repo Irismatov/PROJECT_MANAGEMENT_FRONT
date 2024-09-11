@@ -43,4 +43,22 @@ public class UserController {
         return "redirect:/users/get-hr-admin";
     }
 
+    @PostMapping("/save-employee")
+    public String addEmployee(UserRequest userRequest, Model model) {
+        userService.saveEmployee(userRequest);
+        return "redirect:/users/get-employee";
+    }
+
+    @GetMapping("/get-employee")
+    public String getEmployee(Model model) {
+        model.addAttribute("employees", userService.getAllEmployee());
+        return "hr_admin/employee-crud";
+    }
+
+    @GetMapping("/delete-employee/{id}")
+    public String deleteEmployee(@PathVariable("id") UUID id) {
+        userService.deleteEmployee(id);
+        return "redirect:/users/get-employee";
+    }
+
 }

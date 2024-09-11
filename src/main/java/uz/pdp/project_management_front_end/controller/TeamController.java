@@ -30,12 +30,10 @@ public class TeamController {
     @GetMapping("/get-team")
     public String getAll (Model model) {
         model.addAttribute("teams",teamService.getAllTeams());
-//        model.addAttribute("leads" , userService.getAllTeamLeads());
+        model.addAttribute("leads" , userService.getAllTeamLeads());
 //        model.addAttribute("products", productService.getProducts());
-//        model.addAttribute("scrums", userService.getAllScrumMasters());
+        model.addAttribute("scrums", userService.getAllScrumMasters());
 
-//        model.addAttribute("products", new ArrayList<>());
-//        model.addAttribute("scrums", new ArrayList<>());
         return "hr_admin/team-crud";
     }
 

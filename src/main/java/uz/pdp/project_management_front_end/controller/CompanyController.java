@@ -34,35 +34,37 @@ public class CompanyController {
     }
 
 
-
     @GetMapping("freeze/{id}")
-    public String freeze(@PathVariable("id")UUID id, Model model) {
+    public String freeze(@PathVariable("id") UUID id, Model model) {
         companyService.freezeCompany(id);
         model.addAttribute("company", companyService.getAllCompanies());
         return "pa-dashboard";
     }
 
     @GetMapping("unfreeze/{id}")
-    public String unfreeze(@PathVariable("id")UUID id, Model model) {
+    public String unfreeze(@PathVariable("id") UUID id, Model model) {
         companyService.unfreezeCompany(id);
         model.addAttribute("company", companyService.getAllCompanies());
-
-    @GetMapping("/freeze/{id}/block")
-    public String freeze(@PathVariable("id")UUID id, Model model) {
-        companyService.freezeCompany(id);
-      //  model.addAttribute("company", companyService.getAllCompanies());
         return "pa-dashboard";
     }
 
-
-    @GetMapping("/unfreeze/{id}/unblock")
-    public String unfreeze(@PathVariable("id")UUID id, Model model) {
-        companyService.unfreezeCompany(id);
-    //    model.addAttribute("company", companyService.getAllCompanies());
-
-        return "pa-dashboard";
-    }
+//    @GetMapping("/freeze/{id}/block")
+//    public String freeze(@PathVariable("id")UUID id, Model model) {
+//        companyService.freezeCompany(id);
+//      //  model.addAttribute("company", companyService.getAllCompanies());
+//        return "pa-dashboard";
+//    }
+//
+//
+//    @GetMapping("/unfreeze/{id}/unblock")
+//    public String unfreeze(@PathVariable("id")UUID id, Model model) {
+//        companyService.unfreezeCompany(id);
+//    //    model.addAttribute("company", companyService.getAllCompanies());
+//
+//        return "pa-dashboard";
+//    }
 
 
 
 }
+

@@ -16,6 +16,6 @@ public class TeamRequest {
 
     private String name;
     private String description;
-    private UUID leadId;
-    private UUID scrumMasterId;
+    private String lead;
+    private String scrumMaster;
 }

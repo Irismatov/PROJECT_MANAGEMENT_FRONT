@@ -12,4 +12,6 @@ import lombok.Setter;
 public class TeamResponse {
     private String name;
     private String description;
+    private String lead;
+    private String scrumMaster;
 }

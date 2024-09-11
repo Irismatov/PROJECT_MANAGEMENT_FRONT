@@ -17,4 +17,5 @@ public class TeamResponse {
     private String description;
     private String lead;
     private String scrumMaster;
+    private String developer;
 }

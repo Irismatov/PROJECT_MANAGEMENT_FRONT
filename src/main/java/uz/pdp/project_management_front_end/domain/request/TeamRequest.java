@@ -18,4 +18,5 @@ public class TeamRequest {
     private String description;
     private UUID lead;
     private UUID scrumMaster;
+    private List<UUID> developers;
 }

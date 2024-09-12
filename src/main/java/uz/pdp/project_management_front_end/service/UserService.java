@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import uz.pdp.project_management_front_end.domain.enumerators.Permission;
 import uz.pdp.project_management_front_end.domain.enumerators.UserRole;
+import uz.pdp.project_management_front_end.domain.request.ProductRequest;
 import uz.pdp.project_management_front_end.domain.request.UserRequest;
 import uz.pdp.project_management_front_end.domain.response.CompanyResponse;
 import uz.pdp.project_management_front_end.domain.response.UserResponse;
@@ -189,4 +190,24 @@ public class UserService {
         );
         return response.getBody();
     }
+
+    public UserResponse updateHRAdmin(UUID id, UserRequest userRequest) {
+        HttpHeaders headers = new HttpHeaders();
+
+        String token = (String) httpSession.getAttribute("token");
+        headers.setBearerAuth(token);
+
+        HttpEntity<UserRequest> entity = new HttpEntity<>(userRequest, headers);
+
+        ResponseEntity<UserResponse> response = restTemplate.exchange(
+                "http://localhost:8080/users/update-hr-admin/" + id,
+                HttpMethod.PUT,
+                entity,
+                UserResponse.class
+        );
+
+        // Return the response body, which contains the updated UserResponse
+        return response.getBody();
+    }
+
 }

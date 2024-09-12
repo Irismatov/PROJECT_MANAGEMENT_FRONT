@@ -38,6 +38,12 @@ public class UserController {
         return "ceo/hr-admin-crud";
     }
 
+    @GetMapping("/update-hr-admin/{id}")
+    public String updateHRAdmin(@PathVariable("id") UUID id, @RequestBody UserRequest userRequest, Model model) {
+        model.addAttribute("hr_admins", userService.updateHRAdmin(id, userRequest));
+        return "ceo/hr-admin-crud";
+    }
+
     @GetMapping("/delete-hr-admin/{id}")
     public String deleteHRAdmin(@PathVariable UUID id) {
         userService.deleteHRAdmin(id);
@@ -66,7 +72,7 @@ public class UserController {
     @GetMapping("/get-product-owner")
     public String getProductOwner(Model model) {
         model.addAttribute("hr_admins", userService.getAllProductOwner());
-        return "ceo/hr-admin-crud";
+        return "ceo/po-crud";
     }
 
     @PostMapping("/update")

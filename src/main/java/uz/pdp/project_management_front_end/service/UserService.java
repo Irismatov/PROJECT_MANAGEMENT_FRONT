@@ -238,4 +238,11 @@ public class UserService {
         );
         return response.getBody();
     }
+
+    public void updateUser(UserRequest userRequest, String token) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(token);
+        HttpEntity<UserRequest> entity = new HttpEntity<>(userRequest, headers);
+        restTemplate.put("http://localhost:8080/users/update/" + userRequest.getId(), entity);
+    }
 }

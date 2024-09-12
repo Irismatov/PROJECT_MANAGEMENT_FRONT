@@ -1,5 +1,6 @@
 package uz.pdp.project_management_front_end.controller;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -74,4 +75,9 @@ public class UserController {
         return "ceo/po-crud";
     }
 
+    @PostMapping("/update")
+    public String updateUser(UserRequest userRequest, HttpSession session) {
+        userService.updateUser(userRequest, (String) session.getAttribute("token"));
+        return "redirect:/users/get-employee";
+    }
 }

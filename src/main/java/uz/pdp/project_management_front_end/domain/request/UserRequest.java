@@ -9,6 +9,7 @@ import uz.pdp.project_management_front_end.domain.enumerators.Permission;
 import uz.pdp.project_management_front_end.domain.enumerators.UserRole;
 
 import java.util.List;
+import java.util.UUID;
 
 
 @AllArgsConstructor
@@ -16,6 +17,7 @@ import java.util.List;
 @Getter
 @Setter
 public class UserRequest {
+    private UUID id;
     private String username;
     private String password;
     private String firstName;

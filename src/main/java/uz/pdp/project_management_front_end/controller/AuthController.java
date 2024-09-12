@@ -47,6 +47,10 @@ public class AuthController {
             case PROJECT_ADMINISTRATOR -> {
                 return "pa-dashboard";
             }
+
+            case TEAM_LEAD -> {
+                return "team_lead/teamLead-dashboard";
+            }
         }
 
 

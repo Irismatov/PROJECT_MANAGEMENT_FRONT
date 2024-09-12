@@ -67,4 +67,11 @@ public class UserController {
         return "redirect:/users/get-employee";
     }
 
+
+    @GetMapping("/get-product-owner")
+    public String getProductOwner(Model model) {
+        model.addAttribute("hr_admins", userService.getAllProductOwner());
+        return "ceo/hr-admin-crud";
+    }
+
 }

@@ -3,6 +3,7 @@ package uz.pdp.project_management_front_end.controller;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -10,6 +11,8 @@ import uz.pdp.project_management_front_end.domain.request.LoginRequest;
 import uz.pdp.project_management_front_end.domain.request.RegisterRequest;
 import uz.pdp.project_management_front_end.domain.response.LoginResponse;
 import uz.pdp.project_management_front_end.service.AuthService;
+import uz.pdp.project_management_front_end.service.CompanyService;
+import uz.pdp.project_management_front_end.service.UserService;
 
 
 @Controller
@@ -19,6 +22,10 @@ public class AuthController {
     private AuthService authService;
     @Autowired
     private HttpSession httpSession;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private CompanyService companyService;
 
     @GetMapping("/login")
     public String login() {
@@ -32,10 +39,10 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String login(LoginRequest loginRequest) {
+    public String login(LoginRequest loginRequest, Model model, HttpSession session) {
         LoginResponse login = authService.login(loginRequest);
 
-        httpSession.setAttribute("token", login.getToken());
+        session.setAttribute("token", login.getToken());
 
         switch (login.getRole()) {
             case HR_ADMIN -> {
@@ -45,6 +52,8 @@ public class AuthController {
                 return "ceo/ceo-dashboard";
             }
             case PROJECT_ADMINISTRATOR -> {
+                model.addAttribute("ceos", userService.getAllCEO());
+                model.addAttribute("companies", companyService.getAllCompanies());
                 return "pa-dashboard";
             }
 

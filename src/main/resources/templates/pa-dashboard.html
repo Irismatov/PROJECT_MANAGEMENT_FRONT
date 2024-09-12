@@ -118,7 +118,7 @@
                         </tr>
                         </thead>
                         <tbody id="companyList">
-                        <tr th:each="compan :${company}">
+                        <tr th:each="compan :${companies}">
                             <td th:text="${compan.name}"></td>
                             <td th:text="${compan.address}"></td>
                             <td th:text="${compan.establishmentDate}"></td>
@@ -148,7 +148,7 @@
             <div class="modal-body">
                 <p>Are you sure you want to change the freeze status of this company?</p>
             </div>
-            <div class="modal-footer" th:each="compan : ${company}">
+            <div class="modal-footer" th:each="compan : ${companies}">
 
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                 <a type="button" class="btn btn-warning"

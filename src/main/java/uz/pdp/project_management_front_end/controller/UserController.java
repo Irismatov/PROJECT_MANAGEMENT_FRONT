@@ -71,7 +71,7 @@ public class UserController {
     @GetMapping("/get-product-owner")
     public String getProductOwner(Model model) {
         model.addAttribute("hr_admins", userService.getAllProductOwner());
-        return "ceo/hr-admin-crud";
+        return "ceo/po-crud";
     }
 
 }
